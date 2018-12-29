@@ -7,14 +7,13 @@ export class BusinessList extends Component{
 
   render(){
     return(
-      <div class="BusinessList">
-        <Business />
-        <Business />
-        <Business />
-        <Business />
-        <Business />
-        <Business />
+      <div className="BusinessList"> 
+      {
+        this.props.businesses.map((business) => {
+          return <Business business={business} />
+        })
+      }
       </div>
     )
   }
-}
+};
