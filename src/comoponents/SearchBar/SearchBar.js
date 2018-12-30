@@ -8,6 +8,8 @@ const sortByOptions = {
   'Most Reviewed' : 'review_count'
 };
 
+
+
 export class SearchBar extends Component {
   constructor(props){
     super(props);
@@ -19,6 +21,17 @@ export class SearchBar extends Component {
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    // this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  componentDidMount(){
+    this.boundEnter = this.enter.bind(this);
+    document.addEventListener('keypress', this.boundEnter);
+  }
+
+  componentWillUnmount(){
+    
+    document.removeEventListener('keypress', this.boundEnter);
   }
 
   handleTermChange(event){
@@ -31,7 +44,7 @@ export class SearchBar extends Component {
 
   handleSearch(event){
     this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
-    event.preventDefault();
+    // event.preventDefault();
   }
 
   handleSortByChange(sortByOption){
@@ -54,7 +67,12 @@ export class SearchBar extends Component {
       // values using the sortByOption parameter of the callback function.
       let sortByOptionValue = sortByOptions[sortByOption];
 
-      return <li onClick={this.handleSortByChange.bind(this, sortByOptionValue)} className={this.getSortByClass(sortByOptionValue)} key={sortByOptionValue}>{sortByOption}</li>
+      return <li 
+        onClick={this.handleSortByChange.bind(this, sortByOptionValue)} 
+        className={this.getSortByClass(sortByOptionValue)} 
+        key={sortByOptionValue}>
+          {sortByOption}
+      </li>
 
     })
   }
@@ -72,9 +90,22 @@ export class SearchBar extends Component {
         <input onChange={this.handleLocationChange} placeholder="Where?" />
       </div>
       <div className="SearchBar-submit">
-        <button className="a" onClick={this.handleSearch}>Let's Go</button>
+        <button  
+        
+          className="a" 
+          onClick={this.handleSearch}>
+            Let's Go
+        </button>
+        
       </div>
     </div>
     )
   }
+
+  enter = target => {
+    if (target.charCode === 13) {
+      console.log('Fired!');
+      this.handleSearch();
+    }
+  };
 };
