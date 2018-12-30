@@ -6,17 +6,26 @@ import './Business.css';
 
 
 
+
 class Business extends Component{
   render(){
 
     const { business } = this.props;
+    
 
     return(
       
       <div className="Business">
       
       <div className="image-container">
-        <img src={business.imageSrc} alt=''/>
+        <li>
+          <a href={business.url}>
+            <img
+              src={business.imageSrc} 
+              target="_blank"
+              alt="" />
+          </a>
+        </li>
       </div>
       <h2>{business.name}</h2>
       <div className="Business-information">
@@ -30,6 +39,7 @@ class Business extends Component{
           <h3>{business.category}</h3>
           <h3 className="rating">4.5 stars</h3>
             <p>{business.reviewCount}</p>
+            <p>{business.price}</p>
         </div>
       </div>
       </div>

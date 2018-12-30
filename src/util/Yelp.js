@@ -26,7 +26,8 @@ const Yelp = {
                         category: business.categories[0].title,
                         rating: business.rating,
                         reviewCount: business.review_count,
-                        price: business.price
+                        price: business.price,
+                        url: business.url
                     }
                     
 

@@ -21,7 +21,7 @@ export class SearchBar extends Component {
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    // this.handleKeyPress = this.handleKeyPress.bind(this);
+    
   }
 
   componentDidMount(){
@@ -77,6 +77,16 @@ export class SearchBar extends Component {
     })
   }
 
+  enter = event => {
+    if (event.key === 'Enter') {
+      this.setState({
+        value: this.handleSearch()
+      });
+    }
+  }
+
+  
+
   render(){
     return(
     <div className="SearchBar">
@@ -91,21 +101,16 @@ export class SearchBar extends Component {
       </div>
       <div className="SearchBar-submit">
         <button  
-        
-          className="a" 
+          type="submit"
+          className="a"
+          onKeyPress={this.state.value}
           onClick={this.handleSearch}>
             Let's Go
         </button>
-        
       </div>
     </div>
     )
   }
 
-  enter = target => {
-    if (target.charCode === 13) {
-      console.log('Fired!');
-      this.handleSearch();
-    }
-  };
+  
 };
