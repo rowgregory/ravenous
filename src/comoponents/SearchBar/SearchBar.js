@@ -15,9 +15,27 @@ export class SearchBar extends Component {
       term: '',
       location: '',
       sortBy: 'best_match'
-      };
+    };
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  handleTermChange(event){
+    this.setState({ term: event.target.value });
+  }
+
+  handleLocationChange(event){
+    this.setState({ location: event.target.value });
+  }
+
+  handleSearch(event){
+    this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+    event.preventDefault();
+  }
+
+  handleSortByChange(sortByOption){
+    this.setState({ sortBy: sortByOption });
   }
 
   getSortByClass(sortByOption){
@@ -26,18 +44,6 @@ export class SearchBar extends Component {
     } else {
       return '';
     }  
-  }
-
-  handleSortByChange(sortByOption){
-    this.setState({sortBy: sortByOption});
-  }
-
-  handleTermChange(event){
-    this.setState({term: event.target.value});
-  }
-
-  handleLocationChange(event){
-    this.setState({location: event.target.value});
   }
 
   renderSortByOptions(){
@@ -66,7 +72,7 @@ export class SearchBar extends Component {
         <input onChange={this.handleLocationChange} placeholder="Where?" />
       </div>
       <div className="SearchBar-submit">
-        <a href="/">Let's Go</a>
+        <a onClick={this.handleSearch}>Let's Go</a>
       </div>
     </div>
     )

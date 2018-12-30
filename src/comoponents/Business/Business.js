@@ -4,7 +4,7 @@ import './Business.css';
 
 
 
-export class Business extends Component{
+class Business extends Component{
   render(){
 
     const { business } = this.props;
@@ -32,5 +32,7 @@ export class Business extends Component{
     )
   }
 };
+
+export default Business;
 
 
