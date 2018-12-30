@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-// import { Business } from './comoponents/Business/Business';
+
 import { BusinessList } from './comoponents/BusinessList/BusinessList';
 import { SearchBar } from './comoponents/SearchBar/SearchBar';
 
@@ -18,14 +18,7 @@ const business = {
   reviewCount: 90
 };
 
-const businesses = [
-  business,
-  business,
-  business,
-  business,
-  business,
-  business
-];
+const businesses = [business, business, business, business, business, business];
 
 export class App extends Component {
   render() {
