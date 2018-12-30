@@ -72,7 +72,7 @@ export class SearchBar extends Component {
         <input onChange={this.handleLocationChange} placeholder="Where?" />
       </div>
       <div className="SearchBar-submit">
-        <a onClick={this.handleSearch}>Let's Go</a>
+        <button className="a" onClick={this.handleSearch}>Let's Go</button>
       </div>
     </div>
     )

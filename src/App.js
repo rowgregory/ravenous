@@ -4,28 +4,23 @@ import './App.css';
 
 import BusinessList from './comoponents/BusinessList/BusinessList';
 import { SearchBar } from './comoponents/SearchBar/SearchBar';
+import Yelp from './util/Yelp';
 
-
-
-const business = {
-  imageSrc: 'https://s3.amazonaws.com/codecademy-content/programs/react/ravenous/pizza.jpg',
-  name: 'Lucas Pizzeria',
-  address: '1010 Paddington Way',
-  city: 'Flavortown',
-  state: 'NY',
-  zipCode: '10101',
-  category: 'Italian',
-  rating: 4.5,
-  reviewCount: 90
-};
-
-const businesses = [business, business, business, business, business, business];
 
 export class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      businesses: [],
+    };
+    this.searchYelp = this.searchYelp.bind(this);
+  }
 
   //  three pieces of information we'll send to the Yelp API
   searchYelp(term, location, sortBy){
-    console.log(`You are searching for ${term}, ${location}, and ${sortBy} `);
+   Yelp.searchYelp(term, location, sortBy).then((businesses) => {
+     this.setState({ businesses: businesses });
+   });
   }
 
   render() {
@@ -33,7 +28,7 @@ export class App extends Component {
       <div className="App">
         <h1>ravenous</h1>
         <SearchBar searchYelp={this.searchYelp}/>
-        <BusinessList businesses={businesses} />
+        <BusinessList businesses={this.state.businesses} />
       </div>
     )
   }
